@@ -1,0 +1,51 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and logs
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+*.sqlite3
+
+# Environment variables
+.env
+
+# Static files
+staticfiles/
+*.css
+*.js
+
+# Media files
+media/
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Compiled Python modules
+*.pyc
+*.pyo
+__pycache__/
+
+# Debugging and development files
+*.bak
+*.swp
+*_bak/
+*.sublime*
+.vscode/
+.idea/
+
+# Python notebooks
+.ipynb_checkpoints/
+
+# Local development settings
+settings_local.py
+
+# Project specific files
+*.secret_key
