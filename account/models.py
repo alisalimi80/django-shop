@@ -31,7 +31,7 @@ class User(AbstractBaseUser):
     
 class OTP(models.Model):
     phone_number = models.CharField(max_length=11)
-    code = models.PositiveSmallIntegerField()
+    code = models.PositiveIntegerField()
     create_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
