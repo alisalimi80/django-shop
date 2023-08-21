@@ -3,6 +3,9 @@ from django.urls import reverse
 
 
 class Category(models.Model):
+	sub_category = models.ForeignKey('self',on_delete=models.CASCADE,null=True
+				  					,blank=True,related_name='scategory')
+	is_sub = models.BooleanField(default=False)
 	name = models.CharField(max_length=200)
 	slug = models.SlugField(max_length=200, unique=True)
 
@@ -14,10 +17,13 @@ class Category(models.Model):
 	def __str__(self):
 		return self.name
 	
+	def get_absolute_url(self):
+		return reverse('home:category_slug', args=[self.slug,]) 
+	
 
 
 class Product(models.Model):
-	category = models.ForeignKey(Category,on_delete=models.CASCADE ,related_name='products')
+	category = models.ManyToManyField(Category,related_name='products')
 	name = models.CharField(max_length=200)
 	slug = models.SlugField(max_length=200, unique=True)
 	image = models.ImageField()

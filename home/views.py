@@ -1,6 +1,6 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views import View
-from .models import Product
+from .models import Product , Category
 from bucket import bucket
 from django.contrib import messages
 from . import tasks
@@ -8,9 +8,13 @@ from utils import IsAdminMixin
 
 # Create your views here.
 class HomeView(View):
-	def get(self,request):
+	def get(self,request,category_slug=None):
 		products = Product.objects.filter(available=True)
-		return render(request,'home/home.html',{'products':products})
+		category = Category.objects.filter(is_sub = False)
+		if category_slug:
+			category_slug = Category.objects.get(slug=category_slug)
+			products = products.filter(category = category_slug)
+		return render(request,'home/home.html',{'products':products,'categories':category})
 
 class ProductsDetailView(View):
 	def get(self,request,slug):

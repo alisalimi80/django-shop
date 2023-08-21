@@ -14,6 +14,7 @@ bucket_urls = [
 
 urlpatterns = [
 	path('', views.HomeView.as_view(), name='home'),
-    path('bucket', include(bucket_urls), name='bucket'),
+    path('category/<slug:category_slug>/', views.HomeView.as_view(), name='category_slug'),
+    path('bucket/', include(bucket_urls), name='bucket'),
     path('<slug:slug>/',views.ProductsDetailView.as_view(),name='product_detail')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
