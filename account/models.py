@@ -30,7 +30,7 @@ class User(AbstractBaseUser):
         return self.is_admin
     
 class OTP(models.Model):
-    phone_number = models.CharField(max_length=11)
+    phone_number = models.CharField(max_length=11,unique=True)
     code = models.PositiveIntegerField()
     create_time = models.DateTimeField(auto_now=True)
 
