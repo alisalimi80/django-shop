@@ -8,4 +8,9 @@
       <p>{{product.price}} $</p>
     </div>
 </div>
+<form action="{% url 'orders:add_cart' product.id %}" method="post">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" value="Add to cart">
+</form>
 {% endblock %}

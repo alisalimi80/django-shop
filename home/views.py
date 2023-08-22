@@ -1,6 +1,7 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.views import View
 from .models import Product , Category
+from orders.forms import CartAddForm
 from bucket import bucket
 from django.contrib import messages
 from . import tasks
@@ -17,9 +18,11 @@ class HomeView(View):
 		return render(request,'home/home.html',{'products':products,'categories':category})
 
 class ProductsDetailView(View):
+	form_class = CartAddForm
 	def get(self,request,slug):
 		product =  get_object_or_404(Product,slug=slug)
-		return render(request,'home/product_detail.html',{'product':product})
+		form = self.form_class
+		return render(request,'home/product_detail.html',{'product':product,'form':form})
 
 class BucketView(IsAdminMixin,View):
 	template_name = 'home/bucket.html'
